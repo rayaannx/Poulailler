@@ -1,0 +1,13 @@
+create table if not exists public.series(id uuid primary key default gen_random_uuid(),user_id uuid not null references auth.users(id) on delete cascade,number text not null,entry_date date not null,initial_birds integer not null check(initial_birds>0),days jsonb not null default '[]'::jsonb,created_at timestamptz not null default now());
+alter table public.series enable row level security;
+drop policy if exists "Users can view own series" on public.series;
+drop policy if exists "Users can insert own series" on public.series;
+drop policy if exists "Users can update own series" on public.series;
+drop policy if exists "Users can delete own series" on public.series;
+create policy "Users can view own series" on public.series for select using(auth.uid()=user_id);
+create policy "Users can insert own series" on public.series for insert with check(auth.uid()=user_id);
+create policy "Users can update own series" on public.series for update using(auth.uid()=user_id) with check(auth.uid()=user_id);
+create policy "Users can delete own series" on public.series for delete using(auth.uid()=user_id);
+grant usage on schema public to anon,authenticated;
+grant select,insert,update,delete on public.series to anon,authenticated;
+notify pgrst,'reload schema';
