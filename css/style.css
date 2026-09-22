@@ -256,7 +256,12 @@ button,
 }
 
 .danger{
-  color:var(--red);
+  background:var(--red);
+  color:#fff;
+}
+
+.danger:hover{
+  opacity:.9;
 }
 
 .warning{
