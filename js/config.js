@@ -1,3 +1,7 @@
 const SUPABASE_URL = "https://gvtgugofufbkujqvjifz.supabase.co";
-const SUPABASE_KEY = "COLLE_ICI_LA_CLE_PUBLIQUE_WEB";
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const SUPABASE_KEY = "sb_publishable_I09_z6TIXYgL71jX8fZuTQ_P0KCXdyV";
+
+const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
